@@ -1,7 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+
+
+@font-face {
+  font-family: 'Tropical Asian DEMO';
+  src: url('./utils/fonts/OnlineWebFonts_COM_85bd2ef4e407bd0e2161247a1e30e9bc/Tropical\ Asian\ DEMO\ Regular/@font-face/fdd5ba9f22852caf617de932a0326166.ttf') format('truetype');
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Inter',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
