@@ -37,7 +37,7 @@ function App() {
 
   const forwardSongHandler = () => {
     setCurrentSongIndex(currentSongIndex + 1);
-    if (currentSongIndex >= 50) {
+    if (currentSongIndex >= 49) {
       setCurrentSongIndex(0);
     }
   };
@@ -86,7 +86,6 @@ function App() {
   };
   return (
     <div style={divStyle} className={styles.app}>
-      {/* <div className="stars">{generateStars()}</div> */}
       <div className="comet"></div>
       <div className={styles.cassette}>
         <div className={styles.nail1}>
@@ -459,11 +458,14 @@ function App() {
               fill="white"
             />
           </svg>
-          <p className={play ? styles.title : styles.default}>
-            {!play
-              ? "Serenity Vol.1"
-              : `${playlist[currentSongIndex].track.name} - ${playlist[currentSongIndex].track.artists[0].name}`}
-          </p>
+          <div>
+            <p className={play ? styles.title : styles.default}>
+              {!play
+                ? "Serenity Vol.1"
+                : `${playlist[currentSongIndex].track.name} - ${playlist[currentSongIndex].track.artists[0].name}`}
+            </p>
+          </div>
+
           <svg
             width="30"
             height="30"

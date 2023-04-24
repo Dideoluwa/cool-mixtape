@@ -11,12 +11,13 @@
     flex-direction: column;
     margin: auto;
     margin-bottom: 0px;
-    width: 540px;
+    width: 33.75em;
+    /* width: 32%; */
     background-color: #301560;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center 0px;
-    height: 300px;
+    height: 18.75em;
     box-shadow: -4px 8px 16px rgba(0, 0, 0, 0.5);
     border-radius: 24px;
     position: relative;
@@ -61,7 +62,8 @@
 }
 
 .inner_card {
-    width: 444px;
+    width: 27.75em;
+    /* width: 83%; */
     box-shadow: -3px -3px 3px black, 3px -3px 3px black, 0px 3px 0px black;
     background-image: url('../../assets/innerBk.png');
     background-size: cover;
@@ -90,14 +92,15 @@
     font-family: 'Tropical Asian DEMO';
     font-style: normal;
     font-weight: 550;
-    font-size: 52px;
+    font-size: 3.25rem;
     line-height: 0px;
     color: #0D041D;
 }
 
 .controls {
     margin: 0px auto;
-    width: 300px;
+    width: 18.75em;
+    /* width: 67%; */
     align-items: center;
     height: 68px;
     background: #1D0C3C;
@@ -118,7 +121,7 @@
 }
 
 .song_title {
-    width: 444px;
+    width: 27.75em;
     background-color: black;
     height: 38px;
     margin: auto;
@@ -129,21 +132,33 @@
     justify-content: space-between;
     color: white;
     align-items: center;
+    overflow: hidden;
+}
+
+.song_title div {
+    overflow: hidden;
+    width: 100%;
 }
 
 .song_title .title {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 15px;
+    overflow: auto;
+    display: inline-block;
+    white-space: nowrap;
+    text-align: center;
+    animation: slide 10s infinite 4s;
 }
 
 .song_title .default {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 1rem;
+    text-align: center;
     line-height: 15px;
     animation: blink 2.5s infinite;
 }
@@ -169,7 +184,7 @@
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 15px;
     margin: 0px 16px;
     letter-spacing: 0.06em;
@@ -194,7 +209,7 @@
     font-family: 'Tropical Asian DEMO';
     font-style: normal;
     font-weight: 400;
-    font-size: 28px;
+    font-size: 1.75rem;
     line-height: 20px;
     color: #0D041D;
 }
@@ -216,9 +231,25 @@
     }
 }
 
+@keyframes slide {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
 .inactive {
     display: flex;
     align-items: center;
+    animation: spin 5s linear infinite;
+    animation-play-state: paused;
 }
 
 .active {
@@ -230,5 +261,93 @@
 @keyframes blink {
     50% {
         opacity: 0;
+    }
+}
+
+@media screen and (max-width: 920px) {
+    .cassette {
+        margin: auto;
+        width: 75%;
+        height: 16em;
+    }
+
+    .inner_card {
+        width: 83%;
+        height: 8em;
+        align-items: center;
+    }
+
+    .controls {
+        width: 83%;
+        height: 45px;
+        align-items: center;
+    }
+
+    .color_toggle {
+        width: 40%;
+    }
+
+    .header h1 {
+        font-size: 2.0875rem;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .cassette {
+        margin: auto;
+        width: 95%;
+        height: 16em;
+    }
+
+    .inner_card {
+        width: 83%;
+        height: 8em;
+        align-items: center;
+    }
+
+    .controls {
+        width: 83%;
+        height: 45px;
+        align-items: center;
+    }
+
+    .controls div svg {
+        width: 1.875em;
+    }
+
+
+    .controls svg {
+        width: 1.875em;
+    }
+
+    .song_title {
+        width: 83%;
+    }
+
+    .color_toggle {
+        width: 60%;
+    }
+
+    .song_title .title {
+
+        font-size: 0.625rem;
+        line-height: 0.625rem;
+    }
+
+    .song_title .default {
+        font-size: 0.75rem;
+        line-height: 0.625rem;
+    }
+
+    .header h1 {
+        font-size: 2.1875rem;
+    }
+
+    .color_toggle p {
+        font-size: 0.75rem;
+    }
+
+    .inner_color p {
+        font-size: 1.625rem;
     }
 }
