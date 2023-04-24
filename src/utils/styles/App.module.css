@@ -332,6 +332,18 @@
         height: 16em;
     }
 
+    .cassette2 {
+        margin: auto;
+        width: 75%;
+        height: 16em;
+    }
+
+    .cassette3 {
+        margin: auto;
+        width: 75%;
+        height: 16em;
+    }
+
     .inner_card {
         width: 83%;
         height: 8em;
@@ -360,6 +372,18 @@
     }
 
     .cassette {
+        margin: auto;
+        width: 95%;
+        height: 16em;
+    }
+
+    .cassette2 {
+        margin: auto;
+        width: 95%;
+        height: 16em;
+    }
+
+    .cassette3 {
         margin: auto;
         width: 95%;
         height: 16em;
