@@ -1,0 +1,234 @@
+.app {
+    background-color: #2E1040;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.cassette {
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 0px;
+    width: 540px;
+    background-color: #301560;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center 0px;
+    height: 300px;
+    box-shadow: -4px 8px 16px rgba(0, 0, 0, 0.5);
+    border-radius: 24px;
+    position: relative;
+    background-image: url('../../assets/plines.png');
+}
+
+.cassette::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 3px;
+    background: linear-gradient(to right, #D97FFF, #5D177A);
+    mask: no-repeat center / cover;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+
+.nail1 {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: absolute;
+}
+
+.nail1 svg {
+    margin: 12px;
+}
+
+.nail2 {
+    display: flex;
+    bottom: 0;
+    justify-content: space-between;
+    width: 100%;
+    position: absolute;
+}
+
+.nail2 svg {
+    margin: 12px;
+}
+
+.inner_card {
+    width: 444px;
+    box-shadow: -3px -3px 3px black, 3px -3px 3px black, 0px 3px 0px black;
+    background-image: url('../../assets/innerBk.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 10px;
+    height: 182px;
+    position: relative;
+
+    /* background-color: #F9D4FF; */
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    /* border-radius: 30px 0 30px 0/ 0 30px 0 30px; */
+}
+
+.header {
+    margin: 0px auto;
+    display: flex;
+    /* background-color: red; */
+}
+
+.header h1 {
+    font-family: 'Tropical Asian DEMO';
+    font-style: normal;
+    font-weight: 550;
+    font-size: 52px;
+    line-height: 0px;
+    color: #0D041D;
+}
+
+.controls {
+    margin: 0px auto;
+    width: 300px;
+    align-items: center;
+    height: 68px;
+    background: #1D0C3C;
+    border: 2px solid #130828;
+    border-radius: 40px;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+}
+
+.controls div {
+    margin: 0px 8px;
+}
+
+
+.controls svg {
+    cursor: pointer;
+}
+
+.song_title {
+    width: 444px;
+    background-color: black;
+    height: 38px;
+    margin: auto;
+    margin-top: 2px;
+    border: 1px solid #251248;
+    border-radius: 24px;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    align-items: center;
+}
+
+.song_title .title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 15px;
+}
+
+.song_title .default {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 15px;
+    animation: blink 2.5s infinite;
+}
+
+.song_title svg {
+    margin: 0px 7px;
+}
+
+.color_toggle {
+    display: flex;
+    margin: auto;
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(6px);
+    justify-content: space-between;
+    border-radius: 24px;
+    width: 15%;
+    align-items: center;
+    height: 50px;
+    background: rgba(13, 13, 13, 0.3);
+}
+
+.color_toggle p {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 15px;
+    margin: 0px 16px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+}
+
+.inner_color {
+    /* width: 72px; */
+    height: 40px;
+
+    background: #F9D4FF;
+    border-radius: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 18px;
+}
+
+.inner_color p {
+    font-family: 'Tropical Asian DEMO';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 20px;
+    color: #0D041D;
+}
+
+.inner_color svg {
+    background-color: #1D0C3C;
+    margin-right: 18px;
+    border-radius: 50px;
+    z-index: 1000;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.inactive {
+    display: flex;
+    align-items: center;
+}
+
+.active {
+    display: flex;
+    align-items: center;
+    animation: spin 5s linear infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
