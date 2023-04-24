@@ -1,6 +1,7 @@
 import "./App.css";
 import styles from "./utils/styles/App.module.css";
 import sky from "./assets/sky.gif";
+import flower from "./assets/flower.gif";
 import green from "./assets/green.png";
 import plines from "./assets/plines.png";
 import brownInner from "./assets/brownInnerBk.png";
@@ -51,8 +52,8 @@ function App() {
     },
     {
       name: "BROWN",
-      image: green,
-      backgroundColor: "#77321C",
+      image: flower,
+      backgroundColor: "#4E1F10",
       cassetteBk: "#541F0E",
       lines: blines,
       screw: bscrew,
