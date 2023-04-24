@@ -1,14 +1,67 @@
 import "./App.css";
 import styles from "./utils/styles/App.module.css";
 import sky from "./assets/sky.gif";
+import green from "./assets/green.png";
+import plines from "./assets/plines.png";
+import brownInner from "./assets/brownInnerBk.png";
+import purpleInner from "./assets/innerBk.png";
+import greenInner from "./assets/greenInnerBk.png";
+import glines from "./assets/greenLines.png";
+import blines from "./assets/brownLines.png";
 import { useEffect, useRef, useState } from "react";
 import FetchMixtape from "./utils/api/fetchMixtape";
+import gscrew from "./assets/svg/greenScrew.svg";
+import gicon from "./assets/svg/colorIcon2.svg";
+import bicon from "./assets/svg/colorIcon3.svg";
+import picon from "./assets/svg/colorIcon1.svg";
+import pscrew from "./assets/svg/purpleScrew.svg";
+import bscrew from "./assets/svg/brownScrew.svg";
 
 function App() {
   const [play, setPlay] = useState(false);
   const [playlist, setPlaylist] = useState(null);
   const [currentTime, setCurrentTime] = useState(0);
+  const [backgroundIndex, setBackgroundIndex] = useState(0);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
+
+  const background = [
+    {
+      name: "PURPLE",
+      image: sky,
+      backgroundColor: "#2E1040",
+      cassetteBk: "#301560",
+      lines: plines,
+      screw: pscrew,
+      cntrlBk: "#1D0C3C",
+      innerCard: purpleInner,
+      toggle: "#F9D4FF",
+      icon: picon,
+    },
+    {
+      name: "GREEN",
+      image: green,
+      backgroundColor: "#073222",
+      cassetteBk: "#125C41",
+      lines: glines,
+      screw: gscrew,
+      cntrlBk: "#125C41",
+      innerCard: greenInner,
+      toggle: "#88FFD4",
+      icon: gicon,
+    },
+    {
+      name: "BROWN",
+      image: green,
+      backgroundColor: "#77321C",
+      cassetteBk: "#541F0E",
+      lines: blines,
+      screw: bscrew,
+      cntrlBk: "#541F0E",
+      innerCard: brownInner,
+      toggle: "#FFDCD9",
+      icon: bicon,
+    },
+  ];
 
   const audio = useRef(null);
 
@@ -42,9 +95,14 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    console.log(playlist);
-  }, [playlist]);
+  const backgroundChangeHandler = () => {
+    if (backgroundIndex <= 2) {
+      setBackgroundIndex(backgroundIndex + 1);
+    }
+    if (backgroundIndex >= 2) {
+      setBackgroundIndex(0);
+    }
+  };
 
   useEffect(() => {
     if (audio.current) {
@@ -82,15 +140,20 @@ function App() {
     fetchPlaylistFunction();
   }, []);
 
-  const divStyle = {
-    backgroundImage: `url(${sky})`,
-    backgroundPosition: "center center",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    zIndex: "100000",
-  };
+  let cassetteStyle =
+    background[backgroundIndex].name === "PURPLE" ? styles.cassette : "";
+
+  let cassetteStyle2 =
+    background[backgroundIndex].name === "GREEN" ? styles.cassette2 : "";
+
+  let cassetteStyle3 =
+    background[backgroundIndex].name === "BROWN" ? styles.cassette3 : "";
+
   return (
-    <div style={divStyle} className={styles.app}>
+    <div
+      style={{ backgroundImage: `url(${background[backgroundIndex].image})` }}
+      className={styles.app}
+    >
       <div
         style={{
           position: "absolute",
@@ -98,143 +161,45 @@ function App() {
           left: "0",
           width: "100%",
           height: "100vh",
-          backgroundColor: "#2E1040",
+          backgroundColor: background[backgroundIndex].backgroundColor,
           mixBlendMode: "hue",
         }}
       ></div>
       <div className={styles.app}>
-        <div className={styles.cassette}>
+        <div
+          className={cassetteStyle || cassetteStyle2 || cassetteStyle3}
+          style={{
+            backgroundColor: background[backgroundIndex].cassetteBk,
+            backgroundImage: `url(${background[backgroundIndex].lines})`,
+          }}
+        >
           <div className={styles.nail1}>
-            <svg
-              width="26"
-              height="26"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="8" cy="8" r="7.5" fill="#0D0D0D" stroke="#251248" />
-              <circle cx="8" cy="8" r="6" fill="url(#paint0_linear_1_496)" />
-              <path
-                d="M8.74924 7.00037V7.25037H8.99924H10.9992C11.1981 7.25037 11.3889 7.32938 11.5296 7.47004C11.6702 7.61069 11.7492 7.80145 11.7492 8.00037C11.7492 8.19928 11.6702 8.39004 11.5296 8.5307C11.3894 8.67087 11.1995 8.74982 11.0013 8.75036L9.00367 8.71491L8.74924 8.71039V8.96487V11.0004C8.74924 11.1993 8.67022 11.39 8.52957 11.5307C8.38891 11.6713 8.19815 11.7504 7.99924 11.7504C7.80032 11.7504 7.60956 11.6713 7.46891 11.5307C7.32873 11.3905 7.24977 11.2006 7.24924 11.0024L7.2847 8.96923L7.28921 8.71039L7.03038 8.7149L4.99722 8.75036C4.79904 8.74983 4.60908 8.67087 4.46891 8.5307C4.32825 8.39004 4.24924 8.19928 4.24924 8.00037C4.24924 7.80145 4.32825 7.61069 4.46891 7.47004C4.60956 7.32938 4.80032 7.25037 4.99924 7.25037H7.03474H7.28921L7.2847 6.99593L7.24924 4.99831C7.24978 4.80014 7.32874 4.6102 7.46891 4.47004C7.60956 4.32938 7.80032 4.25037 7.99924 4.25037C8.19815 4.25037 8.38891 4.32938 8.52957 4.47004C8.67022 4.61069 8.74924 4.80145 8.74924 5.00037V7.00037Z"
-                fill="#0D0D0D"
-                stroke="#251248"
-                stroke-width="0.5"
-              />
-              <defs>
-                <linearGradient
-                  id="paint0_linear_1_496"
-                  x1="8"
-                  y1="2"
-                  x2="8"
-                  y2="26"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#321344" />
-                  <stop offset="1" stop-color="#D97FFF" />
-                </linearGradient>
-              </defs>
-            </svg>
+            <img src={background[backgroundIndex].screw} alt="screw" />
 
-            <svg
-              width="26"
-              height="26"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="8" cy="8" r="7.5" fill="#0D0D0D" stroke="#251248" />
-              <circle cx="8" cy="8" r="6" fill="url(#paint0_linear_1_496)" />
-              <path
-                d="M8.74924 7.00037V7.25037H8.99924H10.9992C11.1981 7.25037 11.3889 7.32938 11.5296 7.47004C11.6702 7.61069 11.7492 7.80145 11.7492 8.00037C11.7492 8.19928 11.6702 8.39004 11.5296 8.5307C11.3894 8.67087 11.1995 8.74982 11.0013 8.75036L9.00367 8.71491L8.74924 8.71039V8.96487V11.0004C8.74924 11.1993 8.67022 11.39 8.52957 11.5307C8.38891 11.6713 8.19815 11.7504 7.99924 11.7504C7.80032 11.7504 7.60956 11.6713 7.46891 11.5307C7.32873 11.3905 7.24977 11.2006 7.24924 11.0024L7.2847 8.96923L7.28921 8.71039L7.03038 8.7149L4.99722 8.75036C4.79904 8.74983 4.60908 8.67087 4.46891 8.5307C4.32825 8.39004 4.24924 8.19928 4.24924 8.00037C4.24924 7.80145 4.32825 7.61069 4.46891 7.47004C4.60956 7.32938 4.80032 7.25037 4.99924 7.25037H7.03474H7.28921L7.2847 6.99593L7.24924 4.99831C7.24978 4.80014 7.32874 4.6102 7.46891 4.47004C7.60956 4.32938 7.80032 4.25037 7.99924 4.25037C8.19815 4.25037 8.38891 4.32938 8.52957 4.47004C8.67022 4.61069 8.74924 4.80145 8.74924 5.00037V7.00037Z"
-                fill="#0D0D0D"
-                stroke="#251248"
-                stroke-width="0.5"
-              />
-              <defs>
-                <linearGradient
-                  id="paint0_linear_1_496"
-                  x1="8"
-                  y1="2"
-                  x2="8"
-                  y2="26"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#321344" />
-                  <stop offset="1" stop-color="#D97FFF" />
-                </linearGradient>
-              </defs>
-            </svg>
+            <img src={background[backgroundIndex].screw} alt="screw" />
           </div>
 
           <div className={styles.nail2}>
-            <svg
-              width="26"
-              height="26"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="8" cy="8" r="7.5" fill="#0D0D0D" stroke="#251248" />
-              <circle cx="8" cy="8" r="6" fill="url(#paint0_linear_1_496)" />
-              <path
-                d="M8.74924 7.00037V7.25037H8.99924H10.9992C11.1981 7.25037 11.3889 7.32938 11.5296 7.47004C11.6702 7.61069 11.7492 7.80145 11.7492 8.00037C11.7492 8.19928 11.6702 8.39004 11.5296 8.5307C11.3894 8.67087 11.1995 8.74982 11.0013 8.75036L9.00367 8.71491L8.74924 8.71039V8.96487V11.0004C8.74924 11.1993 8.67022 11.39 8.52957 11.5307C8.38891 11.6713 8.19815 11.7504 7.99924 11.7504C7.80032 11.7504 7.60956 11.6713 7.46891 11.5307C7.32873 11.3905 7.24977 11.2006 7.24924 11.0024L7.2847 8.96923L7.28921 8.71039L7.03038 8.7149L4.99722 8.75036C4.79904 8.74983 4.60908 8.67087 4.46891 8.5307C4.32825 8.39004 4.24924 8.19928 4.24924 8.00037C4.24924 7.80145 4.32825 7.61069 4.46891 7.47004C4.60956 7.32938 4.80032 7.25037 4.99924 7.25037H7.03474H7.28921L7.2847 6.99593L7.24924 4.99831C7.24978 4.80014 7.32874 4.6102 7.46891 4.47004C7.60956 4.32938 7.80032 4.25037 7.99924 4.25037C8.19815 4.25037 8.38891 4.32938 8.52957 4.47004C8.67022 4.61069 8.74924 4.80145 8.74924 5.00037V7.00037Z"
-                fill="#0D0D0D"
-                stroke="#251248"
-                stroke-width="0.5"
-              />
-              <defs>
-                <linearGradient
-                  id="paint0_linear_1_496"
-                  x1="8"
-                  y1="2"
-                  x2="8"
-                  y2="26"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#321344" />
-                  <stop offset="1" stop-color="#D97FFF" />
-                </linearGradient>
-              </defs>
-            </svg>
+            <img src={background[backgroundIndex].screw} alt="screw" />
 
-            <svg
-              width="26"
-              height="26"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle cx="8" cy="8" r="7.5" fill="#0D0D0D" stroke="#251248" />
-              <circle cx="8" cy="8" r="6" fill="url(#paint0_linear_1_496)" />
-              <path
-                d="M8.74924 7.00037V7.25037H8.99924H10.9992C11.1981 7.25037 11.3889 7.32938 11.5296 7.47004C11.6702 7.61069 11.7492 7.80145 11.7492 8.00037C11.7492 8.19928 11.6702 8.39004 11.5296 8.5307C11.3894 8.67087 11.1995 8.74982 11.0013 8.75036L9.00367 8.71491L8.74924 8.71039V8.96487V11.0004C8.74924 11.1993 8.67022 11.39 8.52957 11.5307C8.38891 11.6713 8.19815 11.7504 7.99924 11.7504C7.80032 11.7504 7.60956 11.6713 7.46891 11.5307C7.32873 11.3905 7.24977 11.2006 7.24924 11.0024L7.2847 8.96923L7.28921 8.71039L7.03038 8.7149L4.99722 8.75036C4.79904 8.74983 4.60908 8.67087 4.46891 8.5307C4.32825 8.39004 4.24924 8.19928 4.24924 8.00037C4.24924 7.80145 4.32825 7.61069 4.46891 7.47004C4.60956 7.32938 4.80032 7.25037 4.99924 7.25037H7.03474H7.28921L7.2847 6.99593L7.24924 4.99831C7.24978 4.80014 7.32874 4.6102 7.46891 4.47004C7.60956 4.32938 7.80032 4.25037 7.99924 4.25037C8.19815 4.25037 8.38891 4.32938 8.52957 4.47004C8.67022 4.61069 8.74924 4.80145 8.74924 5.00037V7.00037Z"
-                fill="#0D0D0D"
-                stroke="#251248"
-                stroke-width="0.5"
-              />
-              <defs>
-                <linearGradient
-                  id="paint0_linear_1_496"
-                  x1="8"
-                  y1="2"
-                  x2="8"
-                  y2="26"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#321344" />
-                  <stop offset="1" stop-color="#D97FFF" />
-                </linearGradient>
-              </defs>
-            </svg>
+            <img src={background[backgroundIndex].screw} alt="screw" />
           </div>
 
           {/* Inner card */}
 
-          <div className={styles.inner_card}>
+          <div
+            className={styles.inner_card}
+            style={{
+              backgroundImage: `url(${background[backgroundIndex].innerCard})`,
+            }}
+          >
             <div className={styles.header}>
               <h1>TODAY’S MIXTAPE</h1>
             </div>
-            <div className={styles.controls}>
+            <div
+              style={{ backgroundColor: background[backgroundIndex].cntrlBk }}
+              className={styles.controls}
+            >
               <div className={play ? styles.active : styles.inactive}>
                 <svg
                   width="42"
@@ -247,7 +212,7 @@ function App() {
                     cx="16"
                     cy="16"
                     r="15.5"
-                    fill="#F9D4FF"
+                    fill={background[backgroundIndex].toggle}
                     stroke="#251248"
                   />
                   <ellipse
@@ -262,49 +227,49 @@ function App() {
                     y="4"
                     width="3"
                     height="4.47657"
-                    fill="#F9D4FF"
+                    fill={background[backgroundIndex].toggle}
                   />
                   <rect
                     width="3"
                     height="4.47657"
                     transform="matrix(1 0 0 -1 14.5 28)"
-                    fill="#F9D4FF"
+                    fill={background[backgroundIndex].toggle}
                   />
                   <rect
                     width="2.9922"
                     height="4.4883"
                     transform="matrix(0.70895 0.705259 -0.70895 0.705259 24.03 7.05566)"
-                    fill="#F9D4FF"
+                    fill={background[backgroundIndex].toggle}
                   />
                   <rect
                     width="2.9922"
                     height="4.4883"
                     transform="matrix(0.70895 -0.705259 -0.70895 -0.705259 24.03 24.9443)"
-                    fill="#F9D4FF"
+                    fill={background[backgroundIndex].toggle}
                   />
                   <rect
                     width="2.9922"
                     height="4.4883"
                     transform="matrix(-0.70895 0.705259 0.70895 0.705259 7.59485 7.05566)"
-                    fill="#F9D4FF"
+                    fill={background[backgroundIndex].toggle}
                   />
                   <rect
                     width="2.9922"
                     height="4.4883"
                     transform="matrix(-0.70895 -0.705259 0.70895 -0.705259 7.59485 24.9443)"
-                    fill="#F9D4FF"
+                    fill={background[backgroundIndex].toggle}
                   />
                   <rect
                     width="2.98438"
                     height="4.5"
                     transform="matrix(-0.00464132 0.999989 -0.999989 -0.00459312 28 14.4434)"
-                    fill="#F9D4FF"
+                    fill={background[backgroundIndex].toggle}
                   />
                   <rect
                     width="2.98438"
                     height="4.5"
                     transform="matrix(0.00461716 0.999989 0.999989 -0.00461716 4 14.4431)"
-                    fill="#F9D4FF"
+                    fill={background[backgroundIndex].toggle}
                   />
                 </svg>
               </div>
@@ -398,7 +363,7 @@ function App() {
                     cx="16"
                     cy="16"
                     r="15.5"
-                    fill="#F9D4FF"
+                    fill={background[backgroundIndex].toggle}
                     stroke="#251248"
                   />
                   <ellipse
@@ -413,49 +378,49 @@ function App() {
                     y="4"
                     width="3"
                     height="4.47657"
-                    fill="#F9D4FF"
+                    fill={background[backgroundIndex].toggle}
                   />
                   <rect
                     width="3"
                     height="4.47657"
                     transform="matrix(1 0 0 -1 14.5 28)"
-                    fill="#F9D4FF"
+                    fill={background[backgroundIndex].toggle}
                   />
                   <rect
                     width="2.9922"
                     height="4.4883"
                     transform="matrix(0.70895 0.705259 -0.70895 0.705259 24.03 7.05566)"
-                    fill="#F9D4FF"
+                    fill={background[backgroundIndex].toggle}
                   />
                   <rect
                     width="2.9922"
                     height="4.4883"
                     transform="matrix(0.70895 -0.705259 -0.70895 -0.705259 24.03 24.9443)"
-                    fill="#F9D4FF"
+                    fill={background[backgroundIndex].toggle}
                   />
                   <rect
                     width="2.9922"
                     height="4.4883"
                     transform="matrix(-0.70895 0.705259 0.70895 0.705259 7.59485 7.05566)"
-                    fill="#F9D4FF"
+                    fill={background[backgroundIndex].toggle}
                   />
                   <rect
                     width="2.9922"
                     height="4.4883"
                     transform="matrix(-0.70895 -0.705259 0.70895 -0.705259 7.59485 24.9443)"
-                    fill="#F9D4FF"
+                    fill={background[backgroundIndex].toggle}
                   />
                   <rect
                     width="2.98438"
                     height="4.5"
                     transform="matrix(-0.00464132 0.999989 -0.999989 -0.00459312 28 14.4434)"
-                    fill="#F9D4FF"
+                    fill={background[backgroundIndex].toggle}
                   />
                   <rect
                     width="2.98438"
                     height="4.5"
                     transform="matrix(0.00461716 0.999989 0.999989 -0.00461716 4 14.4431)"
-                    fill="#F9D4FF"
+                    fill={background[backgroundIndex].toggle}
                   />
                 </svg>
               </div>
@@ -501,46 +466,13 @@ function App() {
         </div>
         <div className={styles.color_toggle}>
           <p>COLOR</p>
-          <div className={styles.inner_color}>
-            <p>Purple</p>
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle
-                cx="8"
-                cy="8"
-                r="7.5"
-                fill="url(#pattern0)"
-                stroke="url(#paint0_linear_1_431)"
-              />
-              <circle cx="8" cy="5" r="1" fill="white" />
-              <circle cx="5.5" cy="10.5" r="0.5" fill="white" />
-              <circle cx="11.75" cy="8.75" r="0.75" fill="white" />
-              <defs>
-                <pattern
-                  id="pattern0"
-                  patternContentUnits="objectBoundingBox"
-                  width="1"
-                  height="1"
-                ></pattern>
-                <linearGradient
-                  id="paint0_linear_1_431"
-                  x1="-6.25882"
-                  y1="-10.12"
-                  x2="24.2989"
-                  y2="2.00843"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stop-color="#D97FFF" />
-                  <stop offset="1" stop-color="#5D177A" />
-                </linearGradient>
-                <image id="image0_1_431" width="560" height="560" />
-              </defs>
-            </svg>
+          <div
+            style={{ backgroundColor: background[backgroundIndex].toggle }}
+            className={styles.inner_color}
+            onClick={backgroundChangeHandler}
+          >
+            <p>{background[backgroundIndex].name}</p>
+            <img src={background[backgroundIndex].icon} alt="icon" />
           </div>
         </div>
       </div>

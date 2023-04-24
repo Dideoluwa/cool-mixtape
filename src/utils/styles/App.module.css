@@ -2,6 +2,10 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
 }
 
 .cassette {
@@ -20,7 +24,6 @@
     box-shadow: -4px 8px 16px rgba(0, 0, 0, 0.5);
     border-radius: 24px;
     position: relative;
-    background-image: url('../../assets/plines.png');
 }
 
 .cassette::before {
@@ -37,6 +40,70 @@
 }
 
 
+.cassette2 {
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 0px;
+    width: 33.75em;
+    /* width: 32%; */
+    background-color: #301560;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center 0px;
+    height: 18.75em;
+    box-shadow: -4px 8px 16px rgba(0, 0, 0, 0.5);
+    border-radius: 24px;
+    position: relative;
+}
+
+.cassette2::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 3px;
+    background: linear-gradient(to right, #D2EFF3, #105B40);
+    mask: no-repeat center / cover;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+
+.cassette3 {
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 0px;
+    width: 33.75em;
+    /* width: 32%; */
+    background-color: #301560;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center 0px;
+    height: 18.75em;
+    box-shadow: -4px 8px 16px rgba(0, 0, 0, 0.5);
+    border-radius: 24px;
+    position: relative;
+}
+
+.cassette3::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 3px;
+    background: linear-gradient(to right, #FFDCD9, #6C2812);
+    mask: no-repeat center / cover;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+
 .nail1 {
     display: flex;
     justify-content: space-between;
@@ -44,7 +111,7 @@
     position: absolute;
 }
 
-.nail1 svg {
+.nail1 img {
     margin: 12px;
 }
 
@@ -56,15 +123,13 @@
     position: absolute;
 }
 
-.nail2 svg {
+.nail2 img {
     margin: 12px;
 }
 
 .inner_card {
     width: 27.75em;
-    /* width: 83%; */
     box-shadow: -3px -3px 3px black, 3px -3px 3px black, 0px 3px 0px black;
-    background-image: url('../../assets/innerBk.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -102,7 +167,6 @@
     /* width: 67%; */
     align-items: center;
     height: 68px;
-    background: #1D0C3C;
     border: 2px solid #130828;
     border-radius: 40px;
     z-index: 1000;
@@ -125,7 +189,6 @@
     height: 38px;
     margin: auto;
     margin-top: 2px;
-    border: 1px solid #251248;
     border-radius: 24px;
     display: flex;
     justify-content: space-between;
@@ -196,7 +259,7 @@
 }
 
 .inner_color {
-    /* width: 72px; */
+    cursor: pointer;
     height: 40px;
 
     background: #F9D4FF;
@@ -216,7 +279,7 @@
     color: #0D041D;
 }
 
-.inner_color svg {
+.inner_color img {
     background-color: #1D0C3C;
     margin-right: 18px;
     border-radius: 50px;
@@ -291,6 +354,11 @@
 }
 
 @media screen and (max-width: 540px) {
+    .app {
+        background-size: contain;
+        background-repeat: repeat;
+    }
+
     .cassette {
         margin: auto;
         width: 95%;
