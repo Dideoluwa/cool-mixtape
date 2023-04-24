@@ -1,6 +1,7 @@
 import "./App.css";
 import styles from "./utils/styles/App.module.css";
 import sky from "./assets/sky.gif";
+import duck from "./assets/duck.gif";
 import flower from "./assets/flower.gif";
 import green from "./assets/green.png";
 import plines from "./assets/plines.png";
@@ -167,6 +168,11 @@ function App() {
         }}
       ></div>
       <div className={styles.app}>
+        {backgroundIndex === 1 && (
+          <div className={styles.duck_animation}>
+            <img src={duck} alt="duck" />
+          </div>
+        )}
         <div
           className={cassetteStyle || cassetteStyle2 || cassetteStyle3}
           style={{
