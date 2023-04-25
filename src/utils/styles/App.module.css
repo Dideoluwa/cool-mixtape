@@ -6,6 +6,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
+    position: relative;
 }
 
 .cassette {
@@ -348,6 +349,10 @@
     display: flex;
     margin: 0px auto;
     z-index: 100000;
+    bottom: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .footer p {
@@ -627,5 +632,9 @@
 
     .duck_animation img {
         width: 70%;
+    }
+
+    .footer p {
+        font-size: 1rem;
     }
 }

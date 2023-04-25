@@ -503,7 +503,7 @@ function App() {
             target="_blank"
             rel="noreferrer"
           >
-            TEE
+            TEE 🤟🏾
           </a>
         </p>
       </div>
