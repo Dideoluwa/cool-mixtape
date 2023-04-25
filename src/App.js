@@ -494,18 +494,20 @@ function App() {
           </div>
         </div>
       </div>
-      <div className={styles.footer}>
-        <p style={{ color: background[backgroundIndex].toggle }}>
-          Designed by{" "}
-          <a
-            style={{ color: "#FFB901" }}
-            href="https://twitter.com/teex1111"
-            target="_blank"
-            rel="noreferrer"
-          >
-            TEE 🤟🏾
-          </a>
-        </p>
+      <div className={styles.footer_outer}>
+        <div className={styles.footer}>
+          <p style={{ color: background[backgroundIndex].toggle }}>
+            Designed by{" "}
+            <a
+              style={{ color: "#FFB901" }}
+              href="https://twitter.com/teex1111"
+              target="_blank"
+              rel="noreferrer"
+            >
+              TEE 🤟🏾
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );

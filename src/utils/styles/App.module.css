@@ -344,6 +344,10 @@
     animation: line_flow 2s linear infinite reverse;
 }
 
+.footer_outer {
+    position: relative;
+}
+
 .footer {
     display: flex;
     margin: 0px auto;
