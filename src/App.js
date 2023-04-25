@@ -18,7 +18,7 @@ import bicon from "./assets/svg/colorIcon3.svg";
 import picon from "./assets/svg/colorIcon1.svg";
 import pscrew from "./assets/svg/purpleScrew.svg";
 import bscrew from "./assets/svg/brownScrew.svg";
-import Loading from "./assets/Loading";
+// import Loading from "./assets/Loading";
 
 function App() {
   const [play, setPlay] = useState(false);
