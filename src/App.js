@@ -18,6 +18,7 @@ import bicon from "./assets/svg/colorIcon3.svg";
 import picon from "./assets/svg/colorIcon1.svg";
 import pscrew from "./assets/svg/purpleScrew.svg";
 import bscrew from "./assets/svg/brownScrew.svg";
+import Loading from "./assets/Loading";
 
 function App() {
   const [play, setPlay] = useState(false);
@@ -117,18 +118,18 @@ function App() {
   }, [currentSongIndex, playlist]);
 
   useEffect(() => {
-    const track = audio?.current;
-    const handleEnd = () => {
-      setPlay(false);
-      setCurrentTime(0);
-    };
+    const checkIfSongEnded = setInterval(() => {
+      if (audio.current && audio.current.ended) {
+        setPlay(false);
+        setCurrentTime(0);
+        setCurrentSongIndex((currIndex) => currIndex + 1);
+        setPlay(true);
+        clearInterval(checkIfSongEnded);
+      }
+    }, 1000);
 
-    track?.addEventListener("ended", handleEnd);
-
-    return () => {
-      track?.removeEventListener("ended", handleEnd);
-    };
-  }, [play]);
+    return () => clearInterval(checkIfSongEnded);
+  }, [currentSongIndex]);
 
   useEffect(() => {
     const fetchPlaylistFunction = async () => {
@@ -156,6 +157,10 @@ function App() {
       style={{ backgroundImage: `url(${background[backgroundIndex].image})` }}
       className={styles.app}
     >
+      {/* {  <div className={styles.loader}>
+        <Loading />
+      </div>} */}
+
       <div
         style={{
           position: "absolute",
@@ -449,13 +454,19 @@ function App() {
                 fill="white"
               />
             </svg>
-            <div>
-              <p className={play ? styles.title : styles.default}>
-                {!play
-                  ? "Serenity Vol.1"
-                  : `${playlist[currentSongIndex].track.name} - ${playlist[currentSongIndex].track.artists[0].name}`}
-              </p>
-            </div>
+            <a
+              href={play ? playlist[currentSongIndex]?.track?.uri : "/"}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <div>
+                <p className={play ? styles.title : styles.default}>
+                  {!play
+                    ? "Serenity Vol.1"
+                    : `${playlist[currentSongIndex].track.name} - ${playlist[currentSongIndex].track.artists[0].name}`}
+                </p>
+              </div>
+            </a>
 
             <svg
               width="30"
