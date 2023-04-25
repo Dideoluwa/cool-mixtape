@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const baseUrl = `https://spotify-api-v1.herokuapp.com/mixtape`;
+const baseUrl = process.env.REACT_APP__BASE_URL;
 const FetchMixtape = {
   fetchPlaylist: () => {
     const response = axios({
-      url: `${baseUrl}`,
+      url: `${baseUrl}/mixtape`,
       method: "GET",
       headers: {
         "Content-Type": "application/json",

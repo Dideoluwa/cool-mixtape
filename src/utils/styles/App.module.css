@@ -344,6 +344,24 @@
     animation: line_flow 2s linear infinite reverse;
 }
 
+.footer {
+    display: flex;
+    margin: 0px auto;
+    z-index: 100000;
+}
+
+.footer p {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 1.125rem;
+    line-height: 1.25rem;
+}
+
+.footer p a {
+    text-decoration: none;
+}
+
 @-webkit-keyframes rain {
     0% {
         box-shadow: 6px 0px 0px 0px rgba(255, 255, 255, 1),
