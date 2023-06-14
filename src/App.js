@@ -197,7 +197,7 @@ function App() {
             <img src={background[backgroundIndex].screw} alt="screw" />
           </div>
 
-          {/* Inner card */}
+          {/* Inner  card */}
 
           <div
             className={styles.inner_card}
